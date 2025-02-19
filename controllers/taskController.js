@@ -37,12 +37,15 @@ const createTask = async (req, res) => {
 
 const getTasks = async (req, res) => {
   try {
-    const { page = 1, limit = 10, search } = req.query;
+    const { page = 1, limit = 10, status, search } = req.query;
     const skip = (page - 1) * limit;
-
+    
     const query = { user: req.user._id };
     
-
+    if (status) {
+      query.status = status; 
+    }
+    
     if (search) {
       query.$or = [
         { title: { $regex: search, $options: "i" } },
