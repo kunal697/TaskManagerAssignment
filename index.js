@@ -11,7 +11,7 @@ const app = express();
 connectDB();
 
 app.use(express.json());
-app.use(apiLimiter);
+app.use(apiLimiter);            // 100 request in 10 min for each api
 
 
 app.use("/api/auth", authRoutes);
